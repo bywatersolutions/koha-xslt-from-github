@@ -31,9 +31,6 @@ my @dirs = (
     "/var/lib/koha/$shortname/custom-xslt/intranet",
     "/var/lib/koha/$shortname/custom-xslt/opac",
 );
-for my $dir ( @dirs ) {
-    mkdir $dir;
-}
 
 my @stylesheets = (
     {
@@ -81,6 +78,10 @@ for my $s (@stylesheets) {
     say "FOUND XSLT FILE" if $xslt && $verbose;
 
     if ( $confirm && $xslt ) {
+        for my $dir ( @dirs ) {
+            mkdir $dir;
+        }
+
         say "File created!" if $verbose;
         open my $fh, ">", $s->{filename} or die("Could not open file. $!");
         print $fh $xslt;
