@@ -11,19 +11,24 @@ my $repo =
 
 my $confirm;
 my $verbose;
+my $version;
 GetOptions(
     "c|confirm" => \$confirm,
     "v|verbose" => \$verbose,
+    "version"   => \$version,
 );
 
 $verbose = 1 unless $confirm;
 
 my $rs = Koha::Database->new()->schema()->resultset('Systempreference');
 
-my ($shortname) = split( '-', $ENV{LOGNAME} || $ENV{USERNAME} || $ENV{USER} );
+my $shortname;
+unless ( $version ) {
+    ($shortname) = split( '-', $ENV{LOGNAME} || $ENV{USERNAME} || $ENV{USER} );
+    my ( $major, $minor ) = split( '\.', Koha::version() );
+    my $version = "v$major.$minor";
+}
 say "SHORTNAME: $shortname" if $verbose;
-my ( $major, $minor ) = split( '\.', Koha::version() );
-my $version = "v$major.$minor";
 say "VERSION: $version" if $verbose;
 
 my @dirs = (
