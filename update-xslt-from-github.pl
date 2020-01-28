@@ -6,15 +6,18 @@ use Getopt::Long;
 use Koha;
 use Koha::Database;
 
-my $repo =
-  "https://raw.githubusercontent.com/bywatersolutions/bywater-koha-xslt";
-
 my $confirm;
 my $verbose;
+my $which_repo = q{};
 GetOptions(
     "c|confirm" => \$confirm,
     "v|verbose+" => \$verbose,
+    "r|repo" => \$which_repo,
 );
+
+my $repo = $which_repo eq 'updated'
+  ? "https://raw.githubusercontent.com/bywatersolutions/bywater-koha-xslt"
+  : "https://raw.githubusercontent.com/bywatersolutions/bywater-koha-xslt-updated";
 
 $verbose = 1 unless $confirm;
 
