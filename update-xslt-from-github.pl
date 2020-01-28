@@ -11,11 +11,9 @@ my $repo =
 
 my $confirm;
 my $verbose;
-my $version = q{};
 GetOptions(
     "c|confirm" => \$confirm,
     "v|verbose+" => \$verbose,
-    "version:s"   => \$version,
 );
 
 $verbose = 1 unless $confirm;
@@ -23,21 +21,8 @@ $verbose = 1 unless $confirm;
 my $rs = Koha::Database->new()->schema()->resultset('Systempreference');
 
 my ($shortname) = split( '-', $ENV{LOGNAME} || $ENV{USERNAME} || $ENV{USER} );
-unless ( $version ) {
-    my $koha_version = Koha::version();
-    say "Koha Version: $koha_version" if $verbose > 1;
-    my ( $major, $minor ) = split( '\.', $koha_version );
-    say "Major number: $major" if $verbose > 1;
-    say "Minor number: $minor" if $verbose > 1;
-    $version = "v$major.$minor";
-}
 say "SHORTNAME: $shortname" if $verbose;
-say "VERSION: $version" if $verbose;
 
-unless ( $version =~ m/^v\d\d\.\d\d$/ ) {
-    say "ERROR: Version does not match the format vXX.YY";
-    exit(1);
-}
 unless ( $shortname ) {
     say "ERROR: Unable to detect shortname";
     exit(1);
