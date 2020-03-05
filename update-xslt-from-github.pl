@@ -98,8 +98,10 @@ for my $s (@stylesheets) {
     if ( $confirm && $xslt ) {
         say "CONFIRM SWITCH PASSED, EXECUTING" if $verbose;
         for my $dir ( @dirs ) {
-            my $success = mkdir $dir;
-            die "FAILED TO MAKE DIR $dir" unless $success;
+            unless (-e $dir and -d $dir) {
+                my $success = mkdir $dir;
+                say "FAILED TO MAKE DIR $dir" unless $success;
+            }
         }
 
         say "File created!" if $verbose;
@@ -118,3 +120,5 @@ for my $s (@stylesheets) {
 }
 
 say qq{\n} if $verbose;
+
+exit 0;
