@@ -8,11 +8,13 @@ use Koha::Database;
 
 my $confirm;
 my $verbose;
+my $shortname;
 my $which_repo = q{};
 GetOptions(
-    "c|confirm" => \$confirm,
-    "v|verbose+" => \$verbose,
-    "r|repo=s" => \$which_repo,
+    "c|confirm"     => \$confirm,
+    "v|verbose+"    => \$verbose,
+    "s|shortname=s" => \$shortname,
+    "r|repo=s"      => \$which_repo,
 );
 
 my $repo = $which_repo eq 'updated'
@@ -23,8 +25,10 @@ $verbose = 1 unless $confirm;
 
 my $rs = Koha::Database->new()->schema()->resultset('Systempreference');
 
-my ($shortname) = split( '-', $ENV{LOGNAME} || $ENV{USERNAME} || $ENV{USER} );
-say "SHORTNAME: $shortname" if $verbose;
+unless ( $shortname ) {
+    ($shortname) = split( '-', $ENV{LOGNAME} || $ENV{USERNAME} || $ENV{USER} );
+    say "SHORTNAME: $shortname" if $verbose;
+}
 
 unless ( $shortname ) {
     say "ERROR: Unable to detect shortname";
