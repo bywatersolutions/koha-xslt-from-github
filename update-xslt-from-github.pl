@@ -12,7 +12,7 @@ my $which_repo = q{};
 GetOptions(
     "c|confirm" => \$confirm,
     "v|verbose+" => \$verbose,
-    "r|repo" => \$which_repo,
+    "r|repo=s" => \$which_repo,
 );
 
 my $repo = $which_repo eq 'updated'
