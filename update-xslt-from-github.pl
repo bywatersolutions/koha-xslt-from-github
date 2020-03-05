@@ -9,11 +9,13 @@ use Koha::Database;
 my $confirm;
 my $verbose;
 my $shortname;
+my $target_shortname;
 my $which_repo = q{};
 GetOptions(
     "c|confirm"     => \$confirm,
     "v|verbose+"    => \$verbose,
     "s|shortname=s" => \$shortname,
+    "t|target=s"    => \$target_shortname,
     "r|repo=s"      => \$which_repo,
 );
 
@@ -35,40 +37,47 @@ unless ( $shortname ) {
     exit(1);
 }
 
+# $shortname refers to the shortname in the git repo,
+# target_shortname refers the shortname of the instance on this Koha server
+# They will almost always match except in the case of testing,
+# where the shortname will be the branch being tested, and the target will be
+# your local instance name ( e.g. kohadev )
+$target_shortname ||= $shortname;
+
 my @dirs = (
-    "/var/lib/koha/$shortname/custom-xslt",
-    "/var/lib/koha/$shortname/custom-xslt/intranet",
-    "/var/lib/koha/$shortname/custom-xslt/opac",
+    "/var/lib/koha/$target_shortname/custom-xslt",
+    "/var/lib/koha/$target_shortname/custom-xslt/intranet",
+    "/var/lib/koha/$target_shortname/custom-xslt/opac",
 );
 
 my @stylesheets = (
     {
         url               => "$repo/$shortname/koha-tmpl/intranet-tmpl/prog/en/xslt/MARC21slim2intranetDetail.xsl",
-        filename          => "/var/lib/koha/$shortname/custom-xslt/intranet/$shortname-intranet-detail.xsl",
+        filename          => "/var/lib/koha/$target_shortname/custom-xslt/intranet/$target_shortname-intranet-detail.xsl",
         system_preference => 'XSLTDetailsDisplay',
     },
     {
         url               => "$repo/$shortname/koha-tmpl/intranet-tmpl/prog/en/xslt/MARC21slim2intranetResults.xsl",
-        filename          => "/var/lib/koha/$shortname/custom-xslt/intranet/$shortname-intranet-results.xsl",
+        filename          => "/var/lib/koha/$target_shortname/custom-xslt/intranet/$target_shortname-intranet-results.xsl",
         system_preference => 'XSLTResultsDisplay',
     },
     {
         url               => "$repo/$shortname/koha-tmpl/intranet-tmpl/prog/en/xslt/MARC21slimUtils.xsl",
-        filename          => "/var/lib/koha/$shortname/custom-xslt/intranet/MARC21slimUtils.xsl",
+        filename          => "/var/lib/koha/$target_shortname/custom-xslt/intranet/MARC21slimUtils.xsl",
     },
     {
         url               => "$repo/$shortname/koha-tmpl/opac-tmpl/bootstrap/en/xslt/MARC21slim2OPACDetail.xsl",
-        filename          => "/var/lib/koha/$shortname/custom-xslt/opac/$shortname-opac-detail.xsl",
+        filename          => "/var/lib/koha/$target_shortname/custom-xslt/opac/$target_shortname-opac-detail.xsl",
         system_preference => 'OPACXSLTDetailsDisplay',
     },
     {
         url               => "$repo/$shortname/koha-tmpl/opac-tmpl/bootstrap/en/xslt/MARC21slim2OPACResults.xsl",
-        filename          => "/var/lib/koha/$shortname/custom-xslt/opac/$shortname-opac-results.xsl",
+        filename          => "/var/lib/koha/$target_shortname/custom-xslt/opac/$target_shortname-opac-results.xsl",
         system_preference => 'OPACXSLTResultsDisplay',
     },
     {
         url               => "$repo/$shortname/koha-tmpl/opac-tmpl/bootstrap/en/xslt/MARC21slimUtils.xsl",
-        filename          => "/var/lib/koha/$shortname/custom-xslt/opac/MARC21slimUtils.xsl",
+        filename          => "/var/lib/koha/$target_shortname/custom-xslt/opac/MARC21slimUtils.xsl",
     },
 );
 
