@@ -51,31 +51,31 @@ my @dirs = (
 
 my @stylesheets = (
     {
-        url               => "$repo/$version/$shortname/koha-tmpl/intranet-tmpl/prog/en/xslt/MARC21slim2intranetDetail.xsl",
+        url               => "$repo/$shortname/koha-tmpl/intranet-tmpl/prog/en/xslt/MARC21slim2intranetDetail.xsl",
         filename          => "/var/lib/koha/$shortname/custom-xslt/intranet/$shortname-intranet-detail.xsl",
         system_preference => 'XSLTDetailsDisplay',
     },
     {
-        url               => "$repo/$version/$shortname/koha-tmpl/intranet-tmpl/prog/en/xslt/MARC21slim2intranetResults.xsl",
+        url               => "$repo/$shortname/koha-tmpl/intranet-tmpl/prog/en/xslt/MARC21slim2intranetResults.xsl",
         filename          => "/var/lib/koha/$shortname/custom-xslt/intranet/$shortname-intranet-results.xsl",
         system_preference => 'XSLTResultsDisplay',
     },
     {
-        url               => "$repo/$version/$shortname/koha-tmpl/intranet-tmpl/prog/en/xslt/MARC21slimUtils.xsl",
+        url               => "$repo/$shortname/koha-tmpl/intranet-tmpl/prog/en/xslt/MARC21slimUtils.xsl",
         filename          => "/var/lib/koha/$shortname/custom-xslt/intranet/MARC21slimUtils.xsl",
     },
     {
-        url               => "$repo/$version/$shortname/koha-tmpl/opac-tmpl/bootstrap/en/xslt/MARC21slim2OPACDetail.xsl",
+        url               => "$repo/$shortname/koha-tmpl/opac-tmpl/bootstrap/en/xslt/MARC21slim2OPACDetail.xsl",
         filename          => "/var/lib/koha/$shortname/custom-xslt/opac/$shortname-opac-detail.xsl",
         system_preference => 'OPACXSLTDetailsDisplay',
     },
     {
-        url               => "$repo/$version/$shortname/koha-tmpl/opac-tmpl/bootstrap/en/xslt/MARC21slim2OPACResults.xsl",
+        url               => "$repo/$shortname/koha-tmpl/opac-tmpl/bootstrap/en/xslt/MARC21slim2OPACResults.xsl",
         filename          => "/var/lib/koha/$shortname/custom-xslt/opac/$shortname-opac-results.xsl",
         system_preference => 'OPACXSLTResultsDisplay',
     },
     {
-        url               => "$repo/$version/$shortname/koha-tmpl/opac-tmpl/bootstrap/en/xslt/MARC21slimUtils.xsl",
+        url               => "$repo/$shortname/koha-tmpl/opac-tmpl/bootstrap/en/xslt/MARC21slimUtils.xsl",
         filename          => "/var/lib/koha/$shortname/custom-xslt/opac/MARC21slimUtils.xsl",
     },
 );
