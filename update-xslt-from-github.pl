@@ -93,10 +93,13 @@ for my $s (@stylesheets) {
     $xslt = get( $s->{url} );
 
     say "FOUND XSLT FILE" if $xslt && $verbose;
+    say "ERROR: XSLT FILE NOT FOUND" unless $xslt;
 
     if ( $confirm && $xslt ) {
+        say "CONFIRM SWITCH PASSED, EXECUTING" if $verbose;
         for my $dir ( @dirs ) {
-            mkdir $dir;
+            my $success = mkdir $dir;
+            die "FAILED TO MAKE DIR $dir" unless $success;
         }
 
         say "File created!" if $verbose;
