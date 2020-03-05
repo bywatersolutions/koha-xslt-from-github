@@ -10,9 +10,29 @@ If you are not using ByWater's repos ( and you probably aren't ) you'll want to 
 
 # Usage
 
-update-xslt-from-github --confirm --verbose
+`update-xslt-from-github --confirm --verbose`
 
-Running without --confirm will run the script in test mode. Verbosity is forced in test mode.
+## Options
+```
+-c --confirm: Run in production mode
+-v --verbose: Extra output for debugging
+-s --shortname: Set the shortname to be used for looking for the repo in GitHub, defaults to the Koha instance name
+-t --target: Set the instance of Koha on this server to operate on, defaults to the value of --shortname
+-r --repo: Set the github repo to look for xslt files in, defaults to bywatersolutions/bywater-koha-xslt
+```
+
+If none of the following are set, all will be used. If one or more are set, only those specified will be used.
+
+```
+--opacdetails: Set the opac details xslt file.
+--opacresults: Set the opac results xslt file.
+--opaclists: Sets the opac lists xslt to the same file as opac results. If a file URL is specified, use that instead
+--staffdetails: Set the staff details xslt file.
+--staffresults: Set the staff results xslt file.
+--stafflists: Sets the staff lists xslt to the same file as staff results. If a file URL is specified, use that instead
+````
+
+Running without `--confirm` will run the script in test mode. Verbosity is forced in test mode.
 
 Crontab example:
-@hourly instancename-koha /path/to/koha-xslt-from-github/update-xslt-from-github --confirm
+`@hourly instancename-koha /path/to/koha-xslt-from-github/update-xslt-from-github --confirm`
